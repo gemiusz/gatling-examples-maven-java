@@ -1,7 +1,7 @@
 GeMi Gatling Examples in JAVA
 ============================================
 
-Gatling project in JAVA showing working examples and solutions - Inspired by [Gatling Community](https://community.gatling.io)
+Gatling project in JAVA 17 showing working examples and solutions - Inspired by [Gatling Community](https://community.gatling.io)
 
 
 

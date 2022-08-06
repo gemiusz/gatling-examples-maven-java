@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pl.gemiusz</groupId>
-    <artifactId>gatling-maven-plugin-demo-java</artifactId>
+    <artifactId>gatling-examples-maven-java</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
