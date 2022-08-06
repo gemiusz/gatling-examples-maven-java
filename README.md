@@ -17,3 +17,5 @@ It includes:
 
 Cases:
 * Case0001JmeshPathSimulation -> [JmesPath is not finding a JSON Object](https://community.gatling.io/t/jmespath-is-not-finding-a-json-object/6995)
+* Case0002PDFdownloadSimulation -> [How to ensure a pdf is downloaded during a loadtest?](https://community.gatling.io/t/how-to-ensure-a-pdf-is-downloaded-during-a-loadtest/3927)
+* 
