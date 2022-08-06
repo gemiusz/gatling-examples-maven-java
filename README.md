@@ -21,3 +21,4 @@ Cases:
 * Case0003UnzipJsonForFeederSimulation -> [Unzipping json file for feeders](https://community.gatling.io/t/unzipping-json-file-for-feeders/6996)
 * Case0004StatusCodeSimulation -> [withDefault Check Transforming feature](https://community.gatling.io/t/withdefault-check-transforming-feature/7008)
 * Case0005UUIDfeederSimulation -> [Is there an EL function to generate uuid using java in gatling](https://community.gatling.io/t/is-there-an-el-function-to-generate-uuid-using-java-in-gatling/7028)
+* Case0006CommandLineParametersSimulation -> [Cannot Grab Command Line Arguments](https://community.gatling.io/t/cannot-grab-command-line-arguments/7025)
