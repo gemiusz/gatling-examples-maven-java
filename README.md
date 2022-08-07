@@ -2,8 +2,7 @@ GeMi Gatling Examples in JAVA
 ============================================
 
 Gatling project in JAVA 17 showing working examples and solutions - Inspired by [Gatling Community](https://community.gatling.io)
-
-
+<br><br>
 
 It includes:
 * [Maven Wrapper](https://maven.apache.org/wrapper/), so that you can immediately run Maven with `./mvnw` without having
@@ -12,10 +11,10 @@ It includes:
 * latest version of `io.gatling.highcharts:gatling-charts-highcharts`applied - [Maven Central Repository Search](https://search.maven.org/artifact/io.gatling.highcharts/gatling-charts-highcharts)
 * latest version of `io.gatling:gatling-maven-plugin` applied - [Maven Central Repository Search](https://search.maven.org/artifact/io.gatling/gatling-maven-plugin)
 * official examples: [ComputerDatabaseSimulation](src/test/java/computerdatabase/ComputerDatabaseSimulation.java), [BasicSimulation](src/test/java/computerdatabase/BasicSimulation.java), [AdvancedSimulationStep01](src/test/java/computerdatabase/advanced/AdvancedSimulationStep01.java), [AdvancedSimulationStep02](src/test/java/computerdatabase/advanced/AdvancedSimulationStep02.java), [AdvancedSimulationStep03](src/test/java/computerdatabase/advanced/AdvancedSimulationStep03.java), [AdvancedSimulationStep04](src/test/java/computerdatabase/advanced/AdvancedSimulationStep04.java), [AdvancedSimulationStep05](src/test/java/computerdatabase/advanced/AdvancedSimulationStep05.java)
-* mine examples and solutions mostly based on cases from Gatling Community
+* mine examples and solutions mostly based on cases from [Gatling Community](https://community.gatling.io)
+<br><br><br>
 
-
-Cases:
+### Mine examples and solutions divided into cases:
 * [**Case0001JmeshPathSimulation**](src/test/java/pl/gemiusz/Case0001JmeshPathSimulation.java) => [JmesPath is not finding a JSON Object](https://community.gatling.io/t/jmespath-is-not-finding-a-json-object/6995)
 * [**Case0002PDFdownloadSimulation**](src/test/java/pl/gemiusz/Case0002PDFdownloadSimulation.java) => [How to ensure a pdf is downloaded during a loadtest?](https://community.gatling.io/t/how-to-ensure-a-pdf-is-downloaded-during-a-loadtest/3927)
 * [**Case0003UnzipJsonForFeederSimulation**](src/test/java/pl/gemiusz/Case0003UnzipJsonForFeederSimulation.java) => [Unzipping json file for feeders](https://community.gatling.io/t/unzipping-json-file-for-feeders/6996)
