@@ -15,7 +15,7 @@ It includes:
 <br><br><br>
 
 ### Mine examples and solutions divided into cases:
-* [**Case0001JmeshPathSimulation**](src/test/java/pl/gemiusz/Case0001JmeshPathSimulation.java) => [JmesPath is not finding a JSON Object](https://community.gatling.io/t/jmespath-is-not-finding-a-json-object/6995)
+* [**Case0001JMESPathSimulation**](src/test/java/pl/gemiusz/Case0001JMESPathSimulation.java) => [JmesPath is not finding a JSON Object](https://community.gatling.io/t/jmespath-is-not-finding-a-json-object/6995)
 * [**Case0002PDFdownloadSimulation**](src/test/java/pl/gemiusz/Case0002PDFdownloadSimulation.java) => [How to ensure a pdf is downloaded during a loadtest?](https://community.gatling.io/t/how-to-ensure-a-pdf-is-downloaded-during-a-loadtest/3927)
 * [**Case0003UnzipJsonForFeederSimulation**](src/test/java/pl/gemiusz/Case0003UnzipJsonForFeederSimulation.java) => [Unzipping json file for feeders](https://community.gatling.io/t/unzipping-json-file-for-feeders/6996)
 * [**Case0004StatusCodeSimulation**](src/test/java/pl/gemiusz/Case0004StatusCodeSimulation.java) => [withDefault Check Transforming feature](https://community.gatling.io/t/withdefault-check-transforming-feature/7008)
