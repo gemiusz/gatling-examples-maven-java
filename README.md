@@ -1,4 +1,4 @@
-GeMi Gatling Examples in JAVA [![Build Status](https://github.com/gemiusz/gatling-examples-maven-java/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/gemiusz/gatling-examples-maven-java/actions/workflows/maven.yml?query=branch%3Amaster)
+GeMi Gatling Examples in JAVA [![Build Status](https://github.com/gemiusz/gatling-examples-maven-java/actions/workflows/gatling_test_all_mine.yml/badge.svg?branch=master)](https://github.com/gemiusz/gatling-examples-maven-java/actions/workflows/gatling_test_all_mine.yml?query=branch%3Amaster)
 ============================================
 
 Gatling project in JAVA 17 showing working examples and solutions - Inspired by [Gatling Community](https://community.gatling.io)
@@ -12,6 +12,7 @@ It includes:
 * latest version of `io.gatling:gatling-maven-plugin` applied - [Maven Central Repository Search](https://search.maven.org/artifact/io.gatling/gatling-maven-plugin)
 * official examples: [ComputerDatabaseSimulation](src/test/java/computerdatabase/ComputerDatabaseSimulation.java), [BasicSimulation](src/test/java/computerdatabase/BasicSimulation.java), [AdvancedSimulationStep01](src/test/java/computerdatabase/advanced/AdvancedSimulationStep01.java), [AdvancedSimulationStep02](src/test/java/computerdatabase/advanced/AdvancedSimulationStep02.java), [AdvancedSimulationStep03](src/test/java/computerdatabase/advanced/AdvancedSimulationStep03.java), [AdvancedSimulationStep04](src/test/java/computerdatabase/advanced/AdvancedSimulationStep04.java), [AdvancedSimulationStep05](src/test/java/computerdatabase/advanced/AdvancedSimulationStep05.java)
 * mine examples and solutions mostly based on cases from [Gatling Community](https://community.gatling.io)
+* auto run using GitHub [Actions](https://github.com/gemiusz/gatling-examples-maven-java/actions/workflows/gatling_test_all_mine.yml) of all mine examples after `push` and during `pull_request`
 <br><br><br>
 
 ### Mine examples and solutions divided into cases:
