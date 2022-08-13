@@ -20,11 +20,10 @@ public class Case0006CommandLineParametersSimulation extends Simulation {
             http
                     .baseUrl("https://postman-echo.com");
 
-
     ScenarioBuilder scn =
             scenario("GeMi_CommandLineParametersSimulation")
                     .exec(
-                            http("GeMi_CommandLineParametersSimulation")
+                            http("GeMi_CommandLineParametersSimulation_get")
                                     .get("/get?foo=" + foo + "&bar=" + bar)
                                     .check(jmesPath("args.foo").is(String.valueOf(foo)))
                                     .check(jmesPath("args.bar").is(String.valueOf(bar)))

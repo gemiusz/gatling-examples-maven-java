@@ -21,7 +21,7 @@ public class Case0003UnzipJsonForFeederSimulation extends Simulation {
             scenario("GeMi_UnzipJsonForFeederSimulation")
                     .feed(feederUnzip)
                     .exec(
-                            http("GeMi_UnzipJsonForFeederSimulation")
+                            http("GeMi_UnzipJsonForFeederSimulation_feederUnzip_post")
                                     .post("/post")
                                     .body(StringBody("#{foo}"))
                                     .asJson()
@@ -31,7 +31,7 @@ public class Case0003UnzipJsonForFeederSimulation extends Simulation {
                     )
                     .feed(feederUngzip)
                     .exec(
-                            http("GeMi_UnGzipJsonForFeederSimulation")
+                            http("GeMi_UnGzipJsonForFeederSimulation_feederUngzip_post")
                                     .post("/post")
                                     .body(StringBody("#{bar}"))
                                     .asJson()

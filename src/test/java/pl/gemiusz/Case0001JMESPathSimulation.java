@@ -1,15 +1,11 @@
 package pl.gemiusz;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;
 import io.gatling.javaapi.http.HttpProtocolBuilder;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.http;
@@ -20,10 +16,11 @@ public class Case0001JMESPathSimulation extends Simulation {
     HttpProtocolBuilder httpProtocol =
             http
                     .baseUrl("https://postman-echo.com");
+
     ScenarioBuilder scn =
             scenario("GeMi_JMESPathSimulation")
                     .exec(
-                            http("GeMi_JMESPathSimulation")
+                            http("GeMi_JMESPathSimulation_post")
                                     .post("/post")
                                     .body(StringBody("{\"status\":\"GOOD\",\"fruits\":[{\"name\":\"Apple\",\"details\":{\"size\":500}},{\"name\":\"Cherry\",\"details\":{\"size\":100}}]}"))
                                     .asJson()

@@ -17,7 +17,7 @@ public class Case0002PDFdownloadSimulation extends Simulation {
     ScenarioBuilder scn =
             scenario("GeMi_PDFdownloadSimulation")
                     .exec(
-                            http("GeMi_PDFdownloadSimulation")
+                            http("GeMi_PDFdownloadSimulation_get")
                                     .get("/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf")
                                     .check(bodyBytes().is(RawFileBody("otherFiles/dummy.pdf")))
                                     .check(bodyLength().is(13264))

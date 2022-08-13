@@ -18,7 +18,7 @@ public class Case0009SessionValuesSimulation extends Simulation {
     ScenarioBuilder scn =
             scenario("GeMi_SessionValuesSimulation")
                     .exec(
-                            http("GeMi_SessionValuesSimulation_first")
+                            http("GeMi_SessionValuesSimulation_get_first")
                                     .get("/status/414")
                                     .check(status().is(414).saveAs("GeMi_Response_Code"))
                     ).exec(session -> {
@@ -33,7 +33,7 @@ public class Case0009SessionValuesSimulation extends Simulation {
                         System.out.println("GeMi_Response_Code_2: " + session.get("GeMi_Response_Code_2").toString());
                         return session;
                     }).exec(
-                            http("GeMi_SessionValuesSimulation_later")
+                            http("GeMi_SessionValuesSimulation_get_later")
                                     .get("/get?foo=#{GeMi_Response_Code_2}")
                                     .check(jmesPath("args.foo").is("414_1_2")));
 

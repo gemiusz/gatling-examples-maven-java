@@ -13,7 +13,6 @@ import java.util.stream.Stream;
 
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.http;
-import static io.gatling.javaapi.http.HttpDsl.status;
 
 public class Case0005UUIDfeederSimulation extends Simulation {
 
@@ -32,7 +31,7 @@ public class Case0005UUIDfeederSimulation extends Simulation {
             scenario("GeMi_UUIDfeederSimulation")
                     .feed(feederUUID)
                     .exec(
-                            http("GeMi_UUIDfeederSimulation")
+                            http("GeMi_UUIDfeederSimulation_get")
                                     .get("/get?foo=#{uuidString}")
                                     .check(jmesPath("args.foo").isEL("#{uuidString}"))
                     ).exec(session -> {

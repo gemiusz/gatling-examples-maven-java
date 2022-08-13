@@ -15,6 +15,7 @@ public class Case0010JsonEditVariableSimulation extends Simulation {
     HttpProtocolBuilder httpProtocol =
             http
                     .baseUrl("https://postman-echo.com");
+
     ScenarioBuilder scn =
             scenario("GeMi_JsonEditVariableSimulation")
                     .exec(
