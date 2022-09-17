@@ -8,7 +8,7 @@ import io.gatling.javaapi.http.HttpProtocolBuilder;
 import java.time.Duration;
 import java.util.stream.Stream;
 
-import static io.gatling.javaapi.core.CoreDsl.scenario;
+import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.http;
 import static io.gatling.javaapi.http.HttpDsl.status;
 
@@ -28,13 +28,13 @@ public class Case0014Loop5times1RPSand3sPauseSimulation extends Simulation {
 
     {
         setUp(scn.injectOpen(
-                Stream.generate(
-                        () -> new OpenInjectionStep[]{
-                                OpenInjectionStep.atOnceUsers(1),
-                                OpenInjectionStep.nothingFor(Duration.ofSeconds(3))
-                        }
-        ).limit(5).flatMap(Stream::of).toArray(OpenInjectionStep[]::new)
-        )
+                        Stream.generate(
+                                () -> new OpenInjectionStep[]{
+                                        atOnceUsers(1),
+                                        nothingFor(Duration.ofSeconds(3))
+                                }
+                        ).limit(5).flatMap(Stream::of).toArray(OpenInjectionStep[]::new)
+                )
                 .protocols(httpProtocol));
     }
 }
