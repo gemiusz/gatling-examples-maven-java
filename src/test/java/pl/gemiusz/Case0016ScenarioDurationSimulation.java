@@ -45,7 +45,7 @@ public class Case0016ScenarioDurationSimulation extends Simulation {
                                     .get("/get?foo=#{uuidString}")
                                     .check(jmesPath("args.foo").isEL("#{uuidString}"))
                     )
-                    .pause(Duration.ofSeconds(5))
+                    .pause(Duration.ofMillis(100))
                     .exec(
                             http("GeMi_ScenarioDurationSimulation_get_1_3")
                                     .get("/get?foo=#{uuidString}")
@@ -68,7 +68,7 @@ public class Case0016ScenarioDurationSimulation extends Simulation {
                                     .get("/get?foo=#{uuidString}")
                                     .check(jmesPath("args.foo").isEL("#{uuidString}"))
                     )
-                    .pause(Duration.ofSeconds(10))
+                    .pause(Duration.ofSeconds(1))
                     .exec(
                             http("GeMi_ScenarioDurationSimulation_get_2_2")
                                     .get("/get?foo=#{uuidString}")
@@ -80,7 +80,7 @@ public class Case0016ScenarioDurationSimulation extends Simulation {
                     });
 
     {
-        setUp(scn1.injectOpen(constantUsersPerSec(1).during(Duration.ofSeconds(30))).protocols(httpProtocol),
-                scn2.injectOpen(constantUsersPerSec(1).during(Duration.ofSeconds(30))).protocols(httpProtocol));
+        setUp(scn1.injectOpen(constantUsersPerSec(1).during(Duration.ofSeconds(5))).protocols(httpProtocol),
+                scn2.injectOpen(constantUsersPerSec(1).during(Duration.ofSeconds(5))).protocols(httpProtocol));
     }
 }
