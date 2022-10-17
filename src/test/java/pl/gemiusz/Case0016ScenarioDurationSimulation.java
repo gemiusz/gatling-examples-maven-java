@@ -6,12 +6,7 @@ import io.gatling.javaapi.core.Simulation;
 import io.gatling.javaapi.http.HttpProtocolBuilder;
 
 import java.time.Duration;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.UUID;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.http;
@@ -22,18 +17,12 @@ public class Case0016ScenarioDurationSimulation extends Simulation {
             http
                     .baseUrl("https://postman-echo.com");
 
-    Iterator<Map<String, Object>> feederUUID =
-            Stream.generate((Supplier<Map<String, Object>>) () -> {
-                        String uuidString = UUID.randomUUID().toString();
-                        return Collections.singletonMap("uuidString", uuidString);
-                    }
-            ).iterator();
-
     ScenarioBuilder scn1 =
             scenario("GeMi_ScenarioDurationSimulation_1")
-                    .feed(feederUUID)
                     .exec(session -> {
-                        Session session1 = session.set("GeMi_ScenarioDurationSimulation_1_start", System.nanoTime());
+                        Session session1 = session
+                                .set("GeMi_ScenarioDurationSimulation_1_start", System.nanoTime())
+                                .set("uuidString", UUID.randomUUID().toString());
                         return session1;
                     })
                     .exec(
@@ -58,9 +47,10 @@ public class Case0016ScenarioDurationSimulation extends Simulation {
 
     ScenarioBuilder scn2 =
             scenario("GeMi_ScenarioDurationSimulation_2")
-                    .feed(feederUUID)
                     .exec(session -> {
-                        Session session1 = session.set("GeMi_ScenarioDurationSimulation_2_start", System.nanoTime());
+                        Session session1 = session
+                                .set("GeMi_ScenarioDurationSimulation_2_start", System.nanoTime())
+                                .set("uuidString", UUID.randomUUID().toString());
                         return session1;
                     })
                     .exec(
