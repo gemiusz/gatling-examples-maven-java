@@ -23,4 +23,4 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Run Gatling with Maven
-      run: mvn clean gatling:test -Dgatling.runMultipleSimulations -Dgatling.includes=pl.gemiusz.*
+      run: mvn clean gatling:test -Dgatling.runMultipleSimulations -Dgatling.includes=pl.gemiusz.* -Dgatling.excludes=pl.gemiusz.Case0019WhenStatusCode400ThenFailSimulation
