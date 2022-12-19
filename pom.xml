@@ -7,6 +7,36 @@
     <artifactId>gatling-examples-maven-java</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <name>GeMi Gatling Examples in JAVA</name>
+    <description>Gatling project in JAVA showing working examples and solutions - Inspired by Gatling Community</description>
+    <url>https://github.com/gemiusz/gatling-examples-maven-java</url>
+    <inceptionYear>2022</inceptionYear>
+
+    <developers>
+        <developer>
+            <id>gemiusz</id>
+            <name>Gerard Mista</name>
+            <url>https://github.com/gemiusz</url>
+            <roles>
+                <role>Author</role>
+            </roles>
+            <timezone>Europe/Warsaw</timezone>
+            <properties>
+                <linkedin>https://www.linkedin.com/in/gmista</linkedin>
+            </properties>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/gemiusz/gatling-examples-maven-java.git</connection>
+        <url>https://github.com/gemiusz/gatling-examples-maven-java</url>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/gemiusz/gatling-examples-maven-java/issues</url>
+    </issueManagement>
+
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
