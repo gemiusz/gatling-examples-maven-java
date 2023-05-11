@@ -1,6 +1,6 @@
 package pl.gemiusz;
 
-import io.gatling.javaapi.core.OpenInjectionStep;
+import io.gatling.javaapi.core.ChainBuilder;
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;
 import io.gatling.javaapi.http.HttpProtocolBuilder;
@@ -17,8 +17,10 @@ import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.http;
 
 public class Case0022SetOrRefreshTokenSimulation extends Simulation {
-
     String tokenString = "NOT_SET";
+    boolean tokenRefreshContinue = true;
+    int refreshTokenEverySeconds = 20;
+
     HttpProtocolBuilder httpProtocol =
             http
                     .baseUrl("https://postman-echo.com").shareConnections();
@@ -31,12 +33,12 @@ public class Case0022SetOrRefreshTokenSimulation extends Simulation {
                     }
             ).iterator();
 
-    ScenarioBuilder scnForSetOrRefreshToken =
-            scenario("GeMi_SetOrRefreshToken")
-                    .feed(feederUUID)
+    ChainBuilder chainGenerateAndSetToken =
+            feed(feederUUID)
                     .exec(
                             http("GeMi_SetOrRefreshToken_get")
-                                    .get("/get?foo=#{uuidString}")
+                                    .get("/get")
+                                    .queryParam("foo", "#{uuidString}")
                                     .silent()
                                     .check(jmesPath("args.foo").isEL("#{uuidString}").saveAs("tokenStringNew"))
                     ).exec(session -> {
@@ -46,16 +48,38 @@ public class Case0022SetOrRefreshTokenSimulation extends Simulation {
                         return session;
                     });
 
+    ScenarioBuilder scnForSetFirstToken =
+            scenario("GeMi_SetFirstToken").exec(chainGenerateAndSetToken);
+
+    ScenarioBuilder scnForRefreshToken =
+            scenario("GeMi_SetOrRefreshToken")
+                    .exec(session -> session.set("tokenTime", 0))
+                    .asLongAs(session -> tokenRefreshContinue)
+                    .on(
+                            pause(Duration.ofSeconds(1))
+                                    .exec(session -> session.set("tokenTime", session.getInt("tokenTime") + 1))
+                                    .doIf(session -> session.getInt("tokenTime") % refreshTokenEverySeconds == 0)
+                                    .then(
+                                            exec(chainGenerateAndSetToken)
+                                    )
+                    );
+
+    ScenarioBuilder scnFinishTokenGeneration =
+            scenario("GeMi_FinishTokenGeneration").exec(session -> {
+                tokenRefreshContinue = false;
+                return session;
+            });
 
     ScenarioBuilder scn =
             scenario("GeMi_SomeRequestWithToken")
                     .exec(session -> session.set("tokenStringSession", tokenString))
                     .exec(
                             http("GeMi_SomeRequestWithToken_get")
-                                    .get("/get?foo=#{tokenStringSession}")
+                                    .get("/get")
+                                    .queryParam("foo", "#{tokenStringSession}")
                                     .check(jmesPath("args.foo").saveAs("tokenString4Print"))
                                     .check(jmesPath("args.foo").not("NOT_SET"))
-                                    //.check(jmesPath("args.foo").is(session -> tokenString))
+                            //.check(jmesPath("args.foo").is(session -> tokenString))
                     ).exec(session -> {
                         System.out.println("----------------------------------------------------------");
                         System.out.println("GeMi_SomeRequestWithToken_tokenString: " + tokenString);
@@ -67,20 +91,16 @@ public class Case0022SetOrRefreshTokenSimulation extends Simulation {
 
 
     {
-        setUp(
-                scnForSetOrRefreshToken.injectOpen(
-                        //Duration of this scenario = 1. Time between requests * (2. Number of requests - 1)
-                        Stream.generate(
-                                () -> new OpenInjectionStep[]{
-                                        atOnceUsers(1),
-                                        nothingFor(Duration.ofSeconds(10)) //1. Time between requests
-                                }
+        setUp(scnForSetFirstToken.injectOpen(atOnceUsers(1))
+                .andThen(
+                        scnForRefreshToken.injectOpen(atOnceUsers(1)),
 
-                        ).limit(4) //2. Number of requests
-                                .flatMap(Stream::of).toArray(OpenInjectionStep[]::new)),
-                scn.injectOpen(
-                        nothingFor(Duration.ofSeconds(2)),
-                        constantUsersPerSec(20).during(30)
+                        //--------------------------------
+                        scn.injectOpen(
+                                constantUsersPerSec(10).during(30)
+                                //--------------------------------
+
+                        ).andThen(scnFinishTokenGeneration.injectOpen(atOnceUsers(1)))
                 )
         ).protocols(httpProtocol);
     }
