@@ -83,8 +83,8 @@ public class Case0022SetOrRefreshTokenSimulation extends Simulation {
                     ).exec(session -> {
                         System.out.println("----------------------------------------------------------");
                         System.out.println("GeMi_SomeRequestWithToken_tokenString: " + tokenString);
-                        System.out.println("GeMi_SomeRequestWithToken_tokenStringSession: " + session.get("tokenStringSession").toString());
-                        System.out.println("GeMi_SomeRequestWithToken_tokenString4Print: " + session.get("tokenString4Print").toString());
+                        System.out.println("GeMi_SomeRequestWithToken_tokenStringSession: " + session.getString("tokenStringSession"));
+                        System.out.println("GeMi_SomeRequestWithToken_tokenString4Print: " + session.getString("tokenString4Print"));
                         System.out.println("----------------------------------------------------------");
                         return session;
                     });
