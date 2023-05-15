@@ -72,7 +72,8 @@ public class Case0022SetOrRefreshTokenSimulation extends Simulation {
 
     ScenarioBuilder scn =
             scenario("GeMi_SomeRequestWithToken")
-                    .exec(session -> session.set("tokenStringSession", tokenString))
+                    // Don't forget to set the uptodate token for every request
+                    .exec(session -> session.set("tokenStringSession", tokenString))                    
                     .exec(
                             http("GeMi_SomeRequestWithToken_get")
                                     .get("/get")
