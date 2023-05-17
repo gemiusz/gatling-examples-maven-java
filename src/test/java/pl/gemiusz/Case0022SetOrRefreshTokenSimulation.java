@@ -38,14 +38,14 @@ public class Case0022SetOrRefreshTokenSimulation extends Simulation {
     ChainBuilder chainGenerateAndSetToken =
             feed(feederUUID)
                     .exec(
-                            http("GeMi_SetOrRefreshToken_get")
+                            http("GeMi_GenerateAndSetToken_get")
                                     .get("/get")
                                     .queryParam("foo", "#{uuidString}")
                                     .silent()
                                     .check(jmesPath("args.foo").isEL("#{uuidString}").saveAs("tokenStringNew"))
                     ).exec(session -> {
-                        System.out.println("GeMi_SetOrRefreshToken_uuidString: " + session.get("uuidString"));
-                        System.out.println("GeMi_SetOrRefreshToken_tokenStringNew: " + session.get("tokenStringNew"));
+                        System.out.println("GeMi_GenerateAndSetToken_uuidString: " + session.get("uuidString"));
+                        System.out.println("GeMi_GenerateAndSetToken_tokenStringNew: " + session.get("tokenStringNew"));
                         tokenString = session.get("tokenStringNew");
                         return session;
                     });
@@ -54,7 +54,7 @@ public class Case0022SetOrRefreshTokenSimulation extends Simulation {
             scenario("GeMi_SetFirstToken").exec(chainGenerateAndSetToken);
 
     ScenarioBuilder scnForRefreshToken =
-            scenario("GeMi_SetOrRefreshToken")
+            scenario("GeMi_RefreshToken")
                     .asLongAs(session -> tokenRefreshContinue)
                     .on(
                             pause(Duration.ofSeconds(1))
@@ -68,8 +68,8 @@ public class Case0022SetOrRefreshTokenSimulation extends Simulation {
                                     )
                     );
 
-    ScenarioBuilder scnFinishTokenGeneration =
-            scenario("GeMi_FinishTokenGeneration").exec(session -> {
+    ScenarioBuilder scnForRefreshTokenAbort =
+            scenario("GeMi_RefreshTokenAbort").exec(session -> {
                 tokenRefreshContinue = false;
                 return session;
             });
@@ -104,7 +104,7 @@ public class Case0022SetOrRefreshTokenSimulation extends Simulation {
                                 constantUsersPerSec(10).during(30)
                                 )
                         //--------------------------------
-                                .andThen(scnFinishTokenGeneration.injectOpen(atOnceUsers(1)))
+                                .andThen(scnForRefreshTokenAbort.injectOpen(atOnceUsers(1)))
                 )
         ).protocols(httpProtocol);
     }
