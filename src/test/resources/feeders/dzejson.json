@@ -1,0 +1,30 @@
+[
+	{
+		"username": "UserA",
+		"agendaID": "AgendaA_ID",
+		"patients": [
+			{
+				"patientID": "PatientAX_ID",
+				"patientID64": "PatientAX_ID64"
+			},
+			{
+				"patientID": "PatientAY_ID",
+				"patientID64": "PatientAY_ID64"
+			}
+		]
+	},
+	{
+		"username": "UserB",
+		"agendaID": "AgendaB_ID",
+		"patients": [
+			{
+				"patientID": "PatientBX_ID",
+				"patientID64": "PatientBX_ID64"
+			},
+			{
+				"patientID": "PatientBY_ID",
+				"patientID64": "PatientBY_ID64"
+			}
+		]
+	}
+]
