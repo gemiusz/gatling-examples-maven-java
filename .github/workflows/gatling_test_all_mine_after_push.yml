@@ -1,0 +1,23 @@
+name: gatling:test
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Run Gatling with Maven
+      run: mvn clean gatling:test -Dgatling.runMultipleSimulations -Dgatling.includes=pl.gemiusz.* -Dgatling.excludes=pl.gemiusz.Case0019WhenStatusCode400ThenFailSimulation
+    - name: Maven Dependency Tree Dependency Submission
+      uses: advanced-security/maven-dependency-submission-action@v3.0.2
+      with:
+        ignore-maven-wrapper: true

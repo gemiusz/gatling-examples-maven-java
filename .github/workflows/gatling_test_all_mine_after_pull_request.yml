@@ -1,19 +1,12 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
 name: gatling:test
 
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
@@ -24,9 +17,3 @@ jobs:
         cache: maven
     - name: Run Gatling with Maven
       run: mvn clean gatling:test -Dgatling.runMultipleSimulations -Dgatling.includes=pl.gemiusz.* -Dgatling.excludes=pl.gemiusz.Case0019WhenStatusCode400ThenFailSimulation
-    - name: Maven Dependency Tree Dependency Submission
-      uses: advanced-security/maven-dependency-submission-action@v3.0.2
-      with:
-        ignore-maven-wrapper: true
-    
-
