@@ -1,4 +1,4 @@
-GeMi Gatling Examples in JAVA [![Build Status](https://github.com/gemiusz/gatling-examples-maven-java/actions/workflows/gatling_test_all_mine.yml/badge.svg?branch=master)](https://github.com/gemiusz/gatling-examples-maven-java/actions/workflows/gatling_test_all_mine.yml?query=branch%3Amaster)
+GeMi Gatling Examples in JAVA [![Build Status](https://github.com/gemiusz/gatling-examples-maven-java/actions/workflows/gatling_test_all_mine.yml/badge.svg?branch=master)](https://github.com/gemiusz/gatling-examples-maven-java/actions/workflows/gatling_test_all_mine_after_push.yml?query=branch%3Amaster)
 ============================================
 
 Gatling project in JAVA 17 showing working examples and solutions - Inspired by [Gatling Community](https://community.gatling.io)
