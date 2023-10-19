@@ -19,6 +19,6 @@ jobs:
     - name: Run Gatling with Maven
       run: mvn clean gatling:test -Dgatling.runMultipleSimulations -Dgatling.includes=pl.gemiusz.* -Dgatling.excludes=pl.gemiusz.Case0019WhenStatusCode400ThenFailSimulation
     - name: Maven Dependency Tree Dependency Submission
-      uses: advanced-security/maven-dependency-submission-action@v3.0.2
+      uses: advanced-security/maven-dependency-submission-action@v3.0.3
       with:
         ignore-maven-wrapper: true
