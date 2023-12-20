@@ -29,12 +29,7 @@ public class Case0023foreachFromUUIDfeederFiveRecordsAtTheSameTimeSimulation ext
             scenario("GeMi_foreachFromUUIDfeederFiveRecordsAtTheSameTimeSimulation")
                     .feed(feederUUID, 5)
                     .exec(session -> {
-                        Object[] uuidStringArray = session.get("uuidString");
-                        ArrayList<String> uuidStringArrayList = new ArrayList<>();
-                        for (int i = 0; i < uuidStringArray.length; i++) {
-                            System.out.println("uuidStringArray[" + i + "]: " + uuidStringArray[i]);
-                            uuidStringArrayList.add((String) uuidStringArray[i]);
-                        }
+                        ArrayList<String> uuidStringArrayList = session.get("uuidString");
                         Session session1 = session.set("uuidStringArrayList", uuidStringArrayList);
                         return session1;
                     })

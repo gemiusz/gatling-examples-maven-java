@@ -18,7 +18,7 @@ public class Case0020ExitBlockOnFailSimulation extends Simulation {
 
     ScenarioBuilder scn =
             scenario("GeMi_ExitBlockOnFailSimulation")
-                    .exitBlockOnFail(
+                    .exitBlockOnFail().on(
                             exec(
                                     http("GeMi_ExitBlockOnFailSimulatio_get_200")
                                             .get("/status/200")
