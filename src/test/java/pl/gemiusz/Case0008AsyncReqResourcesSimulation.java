@@ -1,6 +1,6 @@
 package pl.gemiusz;
 
-import io.gatling.javaapi.core.Choice;
+import io.gatling.javaapi.core.CoreDsl;
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;
 import io.gatling.javaapi.http.HttpProtocolBuilder;
@@ -34,7 +34,7 @@ public class Case0008AsyncReqResourcesSimulation extends Simulation {
             scenario("GeMi_AsyncReqResourcesSimulation")
                     .feed(feederInt)
                     .doSwitch("#{randomInt}").on(
-                            Choice.withKey(3,
+                            CoreDsl.onCase(3).then(
                                     exec(
                                             http("GeMi_AsyncReqResourcesSimulation_get")
                                                     .get("/get?foo=#{randomInt}")
@@ -52,7 +52,7 @@ public class Case0008AsyncReqResourcesSimulation extends Simulation {
                                                     )
                                     )
                             ),
-                            Choice.withKey(4,
+                            CoreDsl.onCase(4).then(
                                     exec(
                                             http("GeMi_AsyncReqResourcesSimulation_get")
                                                     .get("/get?foo=#{randomInt}")
@@ -73,7 +73,7 @@ public class Case0008AsyncReqResourcesSimulation extends Simulation {
                                                     )
                                     )
                             ),
-                            Choice.withKey(5,
+                            CoreDsl.onCase(5).then(
                                     exec(
                                             http("GeMi_AsyncReqResourcesSimulation_get")
                                                     .get("/get?foo=#{randomInt}")

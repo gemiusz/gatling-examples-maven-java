@@ -1,6 +1,6 @@
 package pl.gemiusz;
 
-import io.gatling.javaapi.core.Choice;
+import io.gatling.javaapi.core.CoreDsl;
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;
 import io.gatling.javaapi.http.HttpProtocolBuilder;
@@ -49,7 +49,7 @@ public class Case0024IterationLoopCondition extends Simulation {
                     .foreach("#{GeMi_accountsObj}", "account").on(
                             exec(
                                     doSwitch("#{account.accountType}").on(
-                                            Choice.withKey("X",
+                                            CoreDsl.onCase("X").then(
                                                     exec(
                                                             http("GeMi_IterationLoopCondition_get_account_X")
                                                                     .get("/get?foo=#{account.accountID}")
@@ -57,7 +57,7 @@ public class Case0024IterationLoopCondition extends Simulation {
                                                                     .check(jmesPath("args.foo").isEL("123"))
                                                     )
                                             ),
-                                            Choice.withKey("Y",
+                                            CoreDsl.onCase("Y").then(
                                                     exec(
                                                             http("GeMi_IterationLoopCondition_get_account_Y")
                                                                     .get("/get?foo=#{account.accountID}")
@@ -65,7 +65,7 @@ public class Case0024IterationLoopCondition extends Simulation {
                                                                     .check(jmesPath("args.foo").isEL("456"))
                                                     )
                                             ),
-                                            Choice.withKey("Z",
+                                            CoreDsl.onCase("Z").then(
                                                     exec(
                                                             http("GeMi_IterationLoopCondition_get_account_Z")
                                                                     .get("/get?foo=#{account.accountID}")
