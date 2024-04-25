@@ -20,32 +20,34 @@ import static io.gatling.javaapi.http.HttpDsl.status;
  * </ul>
  */
 public class ComputerDatabaseSimulation extends Simulation {
-
     HttpProtocolBuilder httpProtocol =
             http.baseUrl("https://computer-database.gatling.io")
                     .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
                     .acceptLanguageHeader("en-US,en;q=0.5")
                     .acceptEncodingHeader("gzip, deflate")
                     .userAgentHeader(
-                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/119.0");
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/119.0"
+                    );
 
     FeederBuilder<String> feeder = csv("feeders/search.csv").random();
 
-    ChainBuilder search =
-            // Execute actions sequentially
-            exec(
-                    http("Home").get("/"),
-                    pause(1),
-                    feed(feeder),
-                    http("Search")
-                            .get("/computers?f=#{searchCriterion}")
-                            .check(css("a:contains('#{searchComputerName}')", "href").saveAs("computerUrl")),
-                    pause(1),
-                    http("Select").get("#{computerUrl}").check(status().is(200)),
-                    pause(1)
-            );
+    ChainBuilder search = exec(
+            http("Home").get("/"),
+            pause(1),
+            feed(feeder),
+            http("Search")
+                    .get("/computers?f=#{searchCriterion}")
+                    .check(
+                            css("a:contains('#{searchComputerName}')", "href").saveAs("computerUrl")
+                    ),
+            pause(1),
+            http("Select")
+                    .get("#{computerUrl}")
+                    .check(status().is(200)),
+            pause(1)
+    );
 
-    // Repeat is a loop resolved at RUNTIME
+    // repeat is a loop resolved at RUNTIME
     ChainBuilder browse =
             // Note how we force the counter name, so we can reuse it
             repeat(4, "i").on(
@@ -54,10 +56,11 @@ public class ComputerDatabaseSimulation extends Simulation {
             );
 
     // Note we should be using a feeder here
-    // Let's demonstrate how we can retry: let's make the request fail randomly and retry a given
+    // let's demonstrate how we can retry: let's make the request fail randomly and retry a given
     // number of times
+
     ChainBuilder edit =
-            // Let's try at max 2 times
+            // let's try at max 2 times
             tryMax(2)
                     .on(
                             http("Form").get("/computers/new"),
@@ -69,17 +72,17 @@ public class ComputerDatabaseSimulation extends Simulation {
                                     .formParam("discontinued", "")
                                     .formParam("company", "37")
                                     .check(
-                                            status()
-                                                    .is(
-                                                            // We do a check on a condition that's been customized with
-                                                            // a lambda. It will be evaluated every time a user executes
-                                                            // the request.
-                                                            session -> 200 + ThreadLocalRandom.current().nextInt(2)
-                                                    )
+                                            status().is(
+                                                    // we do a check on a condition that's been customized with
+                                                    // a lambda. It will be evaluated every time a user executes
+                                                    // the request
+                                                    session -> 200 + ThreadLocalRandom.current().nextInt(2)
+                                            )
                                     )
                     )
-                    // If the chain didn't finally succeed, have the user exit the whole scenario
+                    // if the chain didn't finally succeed, have the user exit the whole scenario
                     .exitHereIfFailed();
+
 
     ScenarioBuilder users = scenario("Users").exec(search, browse);
     ScenarioBuilder admins = scenario("Admins").exec(search, browse, edit);
