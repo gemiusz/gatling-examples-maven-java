@@ -40,7 +40,7 @@
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <gatling.version>3.11.4</gatling.version>
+        <gatling.version>3.11.5</gatling.version>
         <gatling-maven-plugin.version>4.9.6</gatling-maven-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
