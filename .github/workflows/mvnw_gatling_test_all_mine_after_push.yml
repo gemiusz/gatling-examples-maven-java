@@ -1,4 +1,4 @@
-name: mvnw gatling:test after push
+name: mvnw_gatling:test_after_push
 
 on:
   push:
